@@ -1,13 +1,39 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
 const Employee = () => {
     const [employee, setEmployee] = useState([]);
     const navigate = useNavigate()
 
-    const handleDelete = ()  =>{
+    const handleDelete = (id) => {
+        axios.delete(`http://localhost:8080/auth/delete_employee/${id}`)
+            .then(result => {
+                if (result.data.Status) {
+                    alert('deleted successfully')
+                    getData()
+                } else {
+                    alert(result.data.Error)
+                }
+            }).catch(err => console.log(err))
 
     }
+
+    const getData = () => {
+        axios.get('http://localhost:8080/auth/employee')
+            .then((result) => {
+                if (result.data.Status) {
+                    setEmployee(result.data.result)
+                } else {
+                    alert(result.data.Error)
+                }
+            })
+            .catch((err) => console.log(err))
+    }
+
+    useEffect(() => {
+        getData();
+    }, [])
 
     return (
         <div className="px-5 mt-3">
@@ -31,12 +57,13 @@ const Employee = () => {
                     </thead>
                     <tbody>
                         {employee.map((e) => (
-                            <tr>
-                                <td>{e.name}</td>
+                            <tr key={e.id}>
+                                <td className='text-capitalize'>{e.name}</td>
                                 <td>
                                     <img
-                                        src={`http://localhost:3000/Images/` + e.image}
-                                        className="employee_image"
+                                        src={`http://localhost:8080/Images/` + e.image}
+                                        alt={e.name}
+                                        className="employee_image rounded-circle"
                                     />
                                 </td>
                                 <td>{e.email}</td>
@@ -45,12 +72,12 @@ const Employee = () => {
                                 <td>
                                     <Link
                                         to={`/dashboard/edit_employee/` + e.id}
-                                        className="btn btn-info btn-sm me-2"
+                                        className="btn btn-primary btn-sm me-2"
                                     >
                                         Edit
                                     </Link>
                                     <button
-                                        className="btn btn-warning btn-sm"
+                                        className="btn btn-danger btn-sm"
                                         onClick={() => handleDelete(e.id)}
                                     >
                                         Delete

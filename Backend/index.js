@@ -11,7 +11,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
-
+app.use(express.static('Public'))
 app.use('/auth', adminRouter)
 
 app.listen(8080, () => {

@@ -1,11 +1,19 @@
 import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import "bootstrap-icons/font/bootstrap-icons.css";
+import axios from 'axios';
 
 const Dashboard = () => {
+    const navigate = useNavigate();
 
     const handleLogout = () => {
-
+        axios.get('http://localhost:8080/auth/logout')
+            .then(result => {
+                if (result.data.Status) {
+                    localStorage.removeItem("valid")
+                    navigate('/adminlogin')
+                }
+            })
     }
 
     return (
