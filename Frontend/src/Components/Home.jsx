@@ -82,7 +82,7 @@ const Home = () => {
           <hr />
           <div className='d-flex justify-content-between'>
             <h5>Total:</h5>
-            <h5>${salaryTotal}</h5>
+            <h5>${salaryTotal}/-</h5>
           </div>
         </div>
       </div>
