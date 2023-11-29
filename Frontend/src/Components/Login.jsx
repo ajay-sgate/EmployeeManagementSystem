@@ -18,7 +18,7 @@ const Login = () => {
         axios.post('http://localhost:8080/auth/adminlogin', values)
             .then((result) => {
                 if (result.data.loginStatus) {
-                    console.log(result);
+                    // console.log(result);
                     navigate("/dashboard")
                 }
             })

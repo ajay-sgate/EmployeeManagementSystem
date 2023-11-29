@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const Dashboard = () => {
     const navigate = useNavigate();
+    axios.defaults.withCredentials = true;
 
     const handleLogout = () => {
         axios.get('http://localhost:8080/auth/logout')

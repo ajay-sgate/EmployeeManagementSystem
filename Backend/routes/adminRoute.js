@@ -7,26 +7,54 @@ const path = require("path");
 
 const adminRouter = express.Router();
 
+adminRouter.post('/adminregister', (req, res) => {
+    const sql = "INSERT INTO admin (`email`, `password`) VALUES (?,?)";
+    bcrypt.hash(req.body.password, 10, (err, hash) => {
+        if (err) {
+            return res.status(400).json({ Status: false, Error: "Query / Hashing Error" })
+        }
+        db.query(sql, [req.body.email, hash], (err, result) => {
+            if (err) {
+                return res.status(400).json({ Status: false, Error: "Query Error" })
+            }
+            return res.status(200).json({ Status: true })
+        })
+    })
+})
+
 adminRouter.post('/adminlogin', (req, res) => {
-    const sql = "SELECT * FROM admin WHERE email = ? AND password = ?";
-    db.query(sql, [req.body.email, req.body.password], (err, result) => {
+    const sql = "SELECT * FROM admin WHERE email = ?";
+    db.query(sql, [req.body.email], (err, result) => {
         if (err) {
             return res.status(400).json({ loginStatus: false, Error: "Query Error" })
         };
         if (result.length > 0) {
             const email = result[0].email;
-            const token = jwt.sign(
-                { role: "admin", email: email },
-                "sGate_jwt_secret_key",
-                { expiresIn: "1d" }
-            );
-            res.cookie('token', token)
-            return res.status(200).json({ loginStatus: true });
+            const hashedPassword = result[0].password;
+            bcrypt.compare(req.body.password, hashedPassword, (err, result) => {
+                if (err) {
+                    return res.status(500).json({ Status: false, Error: "Comparison error" });
+                }
+
+                if (result) {
+                    const token = jwt.sign(
+                        { role: "admin", email: email },
+                        "sGate_jwt_secret_key",
+                        { expiresIn: "1d" }
+                    );
+                    res.cookie('token', token)
+                    return res.status(200).json({ loginStatus: true, Message: "Login successful" });
+                } else {
+                    return res.status(401).json({ Status: false, Error: "Invalid email or password" });
+                }
+            });
         } else {
             return res.status(400).json({ loginStatus: false, Error: "Wrong Credentials!!" })
         }
     })
 })
+
+
 
 adminRouter.post('/add_category', (req, res) => {
     const sql = 'INSERT INTO category (`name`) VALUES (?)';
@@ -191,7 +219,7 @@ adminRouter.get('/admin_records', (req, res) => {
 
 adminRouter.get('/logout', (req, res) => {
     res.clearCookie('token')
-    return res.json({Status: true})
+    return res.json({ Status: true })
 })
 
 
