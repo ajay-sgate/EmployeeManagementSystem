@@ -1,13 +1,13 @@
 import './App.css'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Login from './Components/Login'
+import AllRoutes from './Routes/AllRoutes'
 
 function App() {
 
   return (
     <>
-    <Login/>
+    <AllRoutes/>
     </>
   )
 }
