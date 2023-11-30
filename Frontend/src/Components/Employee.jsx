@@ -44,34 +44,34 @@ const Employee = () => {
                 Add Employee
             </Link>
             <div className="mt-3 text-center">
-                <table className="table">
-                    <thead>
+                <table className="table border">
+                    <thead> 
                         <tr>
-                            <th>S.No.</th>
-                            <th>Name</th>
-                            <th>Image</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Salary</th>
-                            <th>Action</th>
+                            <th className='border'>S.No.</th>
+                            <th className='border'>Name</th>
+                            <th className='border'>Image</th>
+                            <th className='border'>Email</th>
+                            <th className='border'>Address</th>
+                            <th className='border'>Salary</th>
+                            <th className='border'>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {employee && employee?.map((e,index) => (
                             <tr key={e.id}>
-                                <td>{index+1}.</td>
-                                <td className='text-capitalize'>{e.name}</td>
-                                <td>
+                                <td className='border'>{index+1}.</td>
+                                <td className='text-capitalize border'>{e.name}</td>
+                                <td className='border'>
                                     <img
                                         src={`http://localhost:8080/Images/${e.image}`}
                                         alt={e.name}
                                         className="employee_image rounded-circle"
                                     />
                                 </td>
-                                <td>{e.email}</td>
-                                <td>{e.address}</td>
-                                <td>$ {e.salary} /-</td>
-                                <td>
+                                <td className='border'>{e.email}</td>
+                                <td className='border'>{e.address}</td>
+                                <td className='border'>$ {e.salary} /-</td>
+                                <td className='border'>
                                     <Link
                                         to={`/dashboard/edit_employee/` + e.id}
                                         className="btn btn-primary btn-sm me-2"

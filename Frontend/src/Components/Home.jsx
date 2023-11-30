@@ -88,21 +88,21 @@ const Home = () => {
       </div>
       <div className='mt-4 px-5 pt-3 text-center'>
         <h3>List of Admins</h3>
-        <table className='table'>
+        <table className='table border'>
           <thead>
             <tr>
-              <th>S.No.</th>
-              <th>Email</th>
-              <th>Action</th>
+              <th className='border'>S.No.</th>
+              <th className='border'>Email</th>
+              <th className='border'>Action</th>
             </tr>
           </thead>
           <tbody>
             {
               admins.map((a,index) => (
                 <tr key={a.id}>
-                  <td>{index+1}.</td>
-                  <td>{a.email}</td>
-                  <td>
+                  <td className='border'>{index+1}.</td>
+                  <td className='border'>{a.email}</td>
+                  <td className='border'>
                     <button
                       className="btn btn-primary btn-sm me-2">
                       Edit

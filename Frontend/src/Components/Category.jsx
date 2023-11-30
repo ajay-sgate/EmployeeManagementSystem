@@ -28,10 +28,10 @@ const Category = () => {
                 </div>
                 <Link to="/dashboard/add_category" className='btn btn-success'>Add Category</Link>
                 <div className='mt-3'>
-                    <table className='table'>
+                    <table className='table border'>
                         <thead>
                             <tr>
-                                <th>Id</th>
+                                <th className='border'>Id</th>
                                 <th>Name</th>
                             </tr>
                         </thead>
@@ -39,7 +39,7 @@ const Category = () => {
                             {
                                 category.map(c => (
                                     <tr key={c.id}>
-                                        <td >{c.id}.</td>
+                                        <td className='border' >{c.id}.</td>
                                         <td >{c.name}</td>
                                     </tr>
                                 ))
