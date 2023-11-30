@@ -20,8 +20,14 @@ ul li :hover {
     height: 40px;
     border: 1px solid grey;
 }
+
 .emp_det_image {
-    width: 300px;
-    height: 300px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
+}
+
+.card-shadow {
+    border-radius: 10%;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }

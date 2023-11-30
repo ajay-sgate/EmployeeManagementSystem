@@ -28,7 +28,7 @@ const Login = () => {
     return (
         <div className='d-flex justify-content-center align-items-center vh-100 loginPage'>
             <div className='p-3 rounded w-25 border loginForm'>
-                <h2 className='text-center'>Login Page</h2>
+                <h2 className='text-center'>Admin Login</h2>
                 <form onSubmit={handleSubmit}>
                     <div className='mb-3'>
                         <label htmlFor="email"> <strong>Email:</strong></label>

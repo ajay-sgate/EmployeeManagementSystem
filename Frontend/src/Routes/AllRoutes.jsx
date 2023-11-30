@@ -10,12 +10,16 @@ import AddCategory from '../Components/AddCategory'
 import AddEmployee from '../Components/AddEmployee'
 import EditEmployee from '../Components/EditEmployee'
 import Start from '../Components/Start'
+import EmployeeLogin from '../Components/EmployeeLogin'
+import EmployeeDetails from '../Components/EmployeeDetails'
 
 const AllRoutes = () => {
     return (
         <Routes>
             <Route path='/' element={<Start />} ></Route>
             <Route path='/adminlogin' element={<Login />} ></Route>
+            <Route path='/employee_login' element={<EmployeeLogin />} ></Route>
+            <Route path='/employee_detail/:id' element={<EmployeeDetails />} ></Route>
             <Route path='/dashboard' element={<Dashboard />} >
                 <Route path='' element={<Home />} ></Route>
                 <Route path='/dashboard/employee' element={<Employee />} ></Route>

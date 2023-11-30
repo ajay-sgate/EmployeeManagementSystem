@@ -56,12 +56,12 @@ const Employee = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {employee.map((e) => (
+                        {employee && employee?.map((e) => (
                             <tr key={e.id}>
                                 <td className='text-capitalize'>{e.name}</td>
                                 <td>
                                     <img
-                                        src={`http://localhost:8080/Images/` + e.image}
+                                        src={`http://localhost:8080/Images/${e.image}`}
                                         alt={e.name}
                                         className="employee_image rounded-circle"
                                     />

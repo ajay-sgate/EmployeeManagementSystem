@@ -25,33 +25,26 @@ adminRouter.post('/adminregister', (req, res) => {
 adminRouter.post('/adminlogin', (req, res) => {
     const sql = "SELECT * FROM admin WHERE email = ?";
     db.query(sql, [req.body.email], (err, result) => {
-        if (err) {
-            return res.status(400).json({ loginStatus: false, Error: "Query Error" })
-        };
+        if (err) return res.json({ loginStatus: false, Error: "Query error" });
         if (result.length > 0) {
-            const email = result[0].email;
-            const hashedPassword = result[0].password;
-            bcrypt.compare(req.body.password, hashedPassword, (err, result) => {
-                if (err) {
-                    return res.status(500).json({ Status: false, Error: "Comparison error" });
-                }
-
-                if (result) {
+            bcrypt.compare(req.body.password, result[0].password, (err, response) => {
+                if (err) return res.json({ loginStatus: false, Error: "Wrong Password" });
+                if (response) {
+                    const email = result[0].email;
                     const token = jwt.sign(
-                        { role: "admin", email: email },
+                        { role: "admin", email: email, id: result[0].id },
                         "sGate_jwt_secret_key",
                         { expiresIn: "1d" }
                     );
                     res.cookie('token', token)
-                    return res.status(200).json({ loginStatus: true, Message: "Login successful" });
-                } else {
-                    return res.status(401).json({ Status: false, Error: "Invalid email or password" });
+                    return res.json({ loginStatus: true, id: result[0].id });
                 }
-            });
+            })
+
         } else {
-            return res.status(400).json({ loginStatus: false, Error: "Wrong Credentials!!" })
+            return res.json({ loginStatus: false, Error: "wrong email or password" });
         }
-    })
+    });
 })
 
 
