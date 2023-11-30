@@ -3,6 +3,8 @@ import './style.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+import { toast } from 'react-toastify';
+
 const Login = () => {
     const [values, setValues] = useState({
         "email": "",
@@ -18,7 +20,19 @@ const Login = () => {
         axios.post('http://localhost:8080/auth/adminlogin', values)
             .then((result) => {
                 if (result.data.loginStatus) {
-                   localStorage.setItem("isAuth", true)
+
+                    toast('Login Successful', {
+                        position: "top-center",
+                        type:"success",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        });
+                    localStorage.setItem("isAuth", true)
                     navigate("/dashboard")
                 }
             })
@@ -44,8 +58,8 @@ const Login = () => {
                         <label htmlFor="tick"> Agree with terms & conditions.</label>
                     </div>
                     <div className='text-warning text-center mb-3'>
-                    {error && error}
-                </div>
+                        {error && error}
+                    </div>
                     <button className='btn btn-success w-100 rounded-0 mb-2' type='submit'>Log in</button>
                 </form>
             </div>
