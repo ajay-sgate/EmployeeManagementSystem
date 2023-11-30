@@ -22,7 +22,7 @@ const Category = () => {
     }, [])
     return (
         <div>
-            <div className='px-5 mt-3'>
+            <div className='px-5 mt-3 text-center'>
                 <div className='d-flex justify-content-center'>
                     <h3>Category List</h3>
                 </div>

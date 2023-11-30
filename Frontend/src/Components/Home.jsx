@@ -82,31 +82,33 @@ const Home = () => {
           <hr />
           <div className='d-flex justify-content-between'>
             <h5>Total:</h5>
-            <h5>${salaryTotal}/-</h5>
+            <h5>$ {salaryTotal} /-</h5>
           </div>
         </div>
       </div>
-      <div className='mt-4 px-5 pt-3'>
+      <div className='mt-4 px-5 pt-3 text-center'>
         <h3>List of Admins</h3>
         <table className='table'>
           <thead>
             <tr>
+              <th>S.No.</th>
               <th>Email</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {
-              admins.map(a => (
+              admins.map((a,index) => (
                 <tr key={a.id}>
+                  <td>{index+1}.</td>
                   <td>{a.email}</td>
                   <td>
                     <button
-                      className="btn btn-info btn-sm me-2">
+                      className="btn btn-primary btn-sm me-2">
                       Edit
                     </button>
                     <button
-                      className="btn btn-warning btn-sm" >
+                      className="btn btn-danger btn-sm" >
                       Delete
                     </button>
                   </td>

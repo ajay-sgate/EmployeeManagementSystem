@@ -43,10 +43,11 @@ const Employee = () => {
             <Link to="/dashboard/add_employee" className="btn btn-success">
                 Add Employee
             </Link>
-            <div className="mt-3">
+            <div className="mt-3 text-center">
                 <table className="table">
                     <thead>
                         <tr>
+                            <th>S.No.</th>
                             <th>Name</th>
                             <th>Image</th>
                             <th>Email</th>
@@ -56,8 +57,9 @@ const Employee = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {employee && employee?.map((e) => (
+                        {employee && employee?.map((e,index) => (
                             <tr key={e.id}>
+                                <td>{index+1}.</td>
                                 <td className='text-capitalize'>{e.name}</td>
                                 <td>
                                     <img
@@ -68,7 +70,7 @@ const Employee = () => {
                                 </td>
                                 <td>{e.email}</td>
                                 <td>{e.address}</td>
-                                <td>{e.salary}</td>
+                                <td>$ {e.salary} /-</td>
                                 <td>
                                     <Link
                                         to={`/dashboard/edit_employee/` + e.id}
