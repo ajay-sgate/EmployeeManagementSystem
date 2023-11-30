@@ -11,7 +11,7 @@ const Dashboard = () => {
         axios.get('http://localhost:8080/auth/logout')
             .then(result => {
                 if (result.data.Status) {
-                    localStorage.removeItem("valid")
+                    localStorage.removeItem("isAuth")
                     navigate('/')
                 }
             })

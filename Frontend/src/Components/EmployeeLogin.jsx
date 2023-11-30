@@ -19,7 +19,7 @@ const EmployeeLogin = () => {
         axios.post('http://localhost:8080/employee/employee_login', values)
             .then(result => {
                 if (result.data.loginStatus) {
-                    localStorage.setItem("valid", true)
+                    localStorage.setItem("isAuth", true)
                     navigate(`/employee_detail/${result.data.id}`)
                 } else {
                     setError(result.data.Error)
