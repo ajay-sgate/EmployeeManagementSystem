@@ -61,7 +61,7 @@ const AddEmployee = () => {
                 <form className="row g-1" onSubmit={handleSubmit}>
                     <div className="col-12">
                         <label htmlFor="inputName" className="form-label">
-                            Name
+                            Name :
                         </label>
                         <input
                             type="text"
@@ -75,7 +75,7 @@ const AddEmployee = () => {
                     </div>
                     <div className="col-12">
                         <label htmlFor="inputEmail4" className="form-label">
-                            Email
+                            Email :
                         </label>
                         <input
                             type="email"
@@ -90,7 +90,7 @@ const AddEmployee = () => {
                     </div>
                     <div className="col-12">
                         <label htmlFor="inputPassword4" className="form-label">
-                            Password
+                            Password :
                         </label>
                         <input
                             type="password"
@@ -102,7 +102,7 @@ const AddEmployee = () => {
                             }
                         />
                         <label htmlFor="inputSalary" className="form-label">
-                            Salary
+                            Salary :
                         </label>
                         <input
                             type="text"
@@ -117,7 +117,7 @@ const AddEmployee = () => {
                     </div>
                     <div className="col-12">
                         <label htmlFor="inputAddress" className="form-label">
-                            Address
+                            Address :
                         </label>
                         <input
                             type="text"
@@ -132,7 +132,7 @@ const AddEmployee = () => {
                     </div>
                     <div className="col-12">
                         <label htmlFor="category" className="form-label">
-                            Category
+                            Category :
                         </label>
                         <select name="category" id="category" className="form-select"
                             onChange={(e) => setEmployee({ ...employee, category_id: e.target.value })}>
@@ -144,7 +144,7 @@ const AddEmployee = () => {
                     </div>
                     <div className="col-12 mb-3">
                         <label className="form-label" htmlFor="inputGroupFile01">
-                            Select Image
+                            Select Image :
                         </label>
                         <input
                             type="file"

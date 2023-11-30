@@ -8,12 +8,12 @@ const path = require("path");
 const adminRouter = express.Router();
 
 adminRouter.post('/adminregister', (req, res) => {
-    const sql = "INSERT INTO admin (`email`, `password`) VALUES (?,?)";
+    const sql = "INSERT INTO admin ( `name`,`email`, `password`) VALUES (?,?,?)";
     bcrypt.hash(req.body.password, 10, (err, hash) => {
         if (err) {
             return res.status(400).json({ Status: false, Error: "Query / Hashing Error" })
         }
-        db.query(sql, [req.body.email, hash], (err, result) => {
+        db.query(sql, [req.body.name, req.body.email, hash], (err, result) => {
             if (err) {
                 return res.status(400).json({ Status: false, Error: "Query Error" })
             }

@@ -45,12 +45,23 @@ const Dashboard = () => {
                             </li>
                             <li className="w-100">
                                 <Link
+                                    to="/dashboard/add_admin"
+                                    className="nav-link px-0 align-middle text-white"
+                                >
+                                    <i class=" fs-4 bi bi-person-add ms-2"></i>
+                                    <span className="m-2 d-none d-sm-inline">
+                                        Add Admin
+                                    </span>
+                                </Link>
+                            </li>
+                            <li className="w-100">
+                                <Link
                                     to="/dashboard/employee"
                                     className="nav-link px-0 align-middle text-white"
                                 >
                                     <i className="fs-4 bi-people ms-2"></i>
-                                    <span className="ms-2 d-none d-sm-inline">
-                                        Manage Employees
+                                    <span className="m-2 d-none d-sm-inline">
+                                        Manage Staff
                                     </span>
                                 </Link>
                             </li>
