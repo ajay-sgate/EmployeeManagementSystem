@@ -1,12 +1,26 @@
+import axios from 'axios'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const AddAdmin = () => {
-    const [employee, setEmployee] = useState({
+    const navigate = useNavigate();
+    const [admin, setAdmin] = useState({
+        "name": "",
         "email": "",
         "password": ""
     })
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:8080/auth/adminregister', admin)
+            .then((result) => {
+                if (result.data.Status) {
+                    navigate('/dashboard')
+                } else {
+                    alert(result.data.Error)
+                }
+            })
+            .catch((err) => console.log(err))
 
     }
 
@@ -15,6 +29,20 @@ const AddAdmin = () => {
             <div className="p-3 rounded w-50 border">
                 <h3 className="text-center">Add Admin</h3>
                 <form className="row g-1" onSubmit={handleSubmit}>
+                    <div className="col-12">
+                        <label htmlFor="inputName" className="form-label">
+                            Name :
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control rounded-0"
+                            id="inputName"
+                            placeholder="Enter Name"
+                            onChange={(e) =>
+                                setAdmin({ ...admin, name: e.target.value })
+                            }
+                        />
+                    </div>
                     <div className="col-12">
                         <label htmlFor="inputEmail4" className="form-label">
                             Email :
@@ -26,7 +54,7 @@ const AddAdmin = () => {
                             placeholder="Enter Email"
                             autoComplete="off"
                             onChange={(e) =>
-                                setEmployee({ ...employee, email: e.target.value })
+                                setAdmin({ ...admin, email: e.target.value })
                             }
                         />
                     </div>
@@ -40,7 +68,7 @@ const AddAdmin = () => {
                             id="inputPassword4"
                             placeholder="Enter Password"
                             onChange={(e) =>
-                                setEmployee({ ...employee, password: e.target.value })
+                                setAdmin({ ...admin, password: e.target.value })
                             }
                         />
                     </div>

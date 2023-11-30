@@ -48,7 +48,7 @@ const Dashboard = () => {
                                     to="/dashboard/add_admin"
                                     className="nav-link px-0 align-middle text-white"
                                 >
-                                    <i class=" fs-4 bi bi-person-add ms-2"></i>
+                                    <i className=" fs-4 bi bi-person-add ms-2"></i>
                                     <span className="m-2 d-none d-sm-inline">
                                         Add Admin
                                     </span>
