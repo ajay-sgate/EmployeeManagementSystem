@@ -32,7 +32,7 @@ const Category = () => {
                         <thead>
                             <tr>
                                 <th className='border'>Id</th>
-                                <th>Name</th>
+                                <th>Positions</th>
                             </tr>
                         </thead>
                         <tbody>

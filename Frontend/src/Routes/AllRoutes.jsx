@@ -15,6 +15,7 @@ import EmployeeDetails from '../Components/EmployeeDetails'
 import PrivateRoute from './PrivateRoute'
 import AddAdmin from '../Components/AddAdmin'
 import NotFound from '../Components/NotFound'
+import EditAdmin from '../Components/EditAdmin'
 
 const AllRoutes = () => {
     return (
@@ -32,6 +33,7 @@ const AllRoutes = () => {
                 <Route path='/dashboard/add_category' element={<AddCategory />} ></Route>
                 <Route path='/dashboard/add_employee' element={<AddEmployee />} ></Route>
                 <Route path='/dashboard/edit_employee/:id' element={<EditEmployee />} ></Route>
+                <Route path='/dashboard/edit_admin/:id' element={<EditAdmin />} ></Route>
             </Route>
             <Route path='*' element={<NotFound />} ></Route>
         </Routes>

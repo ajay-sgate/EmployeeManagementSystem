@@ -1,5 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const Home = () => {
   const [adminTotal, setAdminTotal] = useState(0)
@@ -52,6 +54,32 @@ const Home = () => {
         }
       })
   }
+
+  const handleDelete = (id, name) => {
+    axios.delete(`http://localhost:8080/auth/delete_admin/${id}`)
+      .then((result) => {
+        if (result.data.Status) {
+          toast(`Admin ${name} Deleted !!`, {
+            position: "top-center",
+            type: "info",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          adminCount();
+          AdminRecords();
+        } else {
+          alert(result.data.Error)
+        }
+      })
+      .catch((err) => console.log(err))
+
+  }
+
   return (
     <div>
       <div className='p-3 d-flex justify-content-around mt-3'>
@@ -92,23 +120,29 @@ const Home = () => {
           <thead>
             <tr>
               <th className='border'>S.No.</th>
+              <th className='border'>Name</th>
               <th className='border'>Email</th>
               <th className='border'>Action</th>
             </tr>
           </thead>
           <tbody>
             {
-              admins.map((a,index) => (
+              admins.map((a, index) => (
                 <tr key={a.id}>
-                  <td className='border'>{index+1}.</td>
+                  <td className='border'>{index + 1}.</td>
+                  <td className='border'>{a.name}</td>
                   <td className='border'>{a.email}</td>
                   <td className='border'>
-                    <button
-                      className="btn btn-primary btn-sm me-2">
+                    <Link
+                      to={`/dashboard/edit_admin/` + a.id}
+                      className="btn btn-primary btn-sm me-2"
+                    >
                       Edit
-                    </button>
+                    </Link>
                     <button
-                      className="btn btn-danger btn-sm" >
+                      className="btn btn-danger btn-sm"
+                      onClick={() => handleDelete(a.id, a.name)}
+                    >
                       Delete
                     </button>
                   </td>

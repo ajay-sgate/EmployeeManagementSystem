@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import "bootstrap-icons/font/bootstrap-icons.css";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -11,6 +12,17 @@ const Dashboard = () => {
         axios.get('http://localhost:8080/auth/logout')
             .then(result => {
                 if (result.data.Status) {
+                    toast('Logout Successful', {
+                        position: "top-center",
+                        type:"success",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        });
                     localStorage.removeItem("isAuth")
                     navigate('/')
                 }

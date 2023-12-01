@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const AddCategory = () => {
     const [category, setCategory] = useState('');
@@ -11,6 +12,17 @@ const AddCategory = () => {
         axios.post('http://localhost:8080/auth/add_category', { category })
             .then(result => {
                 if(result.data.Status) {
+                    toast(`New Category Added !!`, {
+                        position: "top-center",
+                        type:"success",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        });
                     navigate('/dashboard/category')
                 } else {
                     alert(result.data.Error)

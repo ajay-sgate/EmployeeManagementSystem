@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const EmployeeDetails = () => {
     const [employee, setEmployee] = useState([])
@@ -19,6 +20,17 @@ const EmployeeDetails = () => {
         axios.get('http://localhost:8080/employee/logout')
         .then(result => {
             if (result.data.Status) {
+                toast('Logout Successful', {
+                    position: "top-center",
+                    type:"success",
+                    autoClose: 1000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                    });
                 localStorage.removeItem("isAuth")
                 navigate('/')
             }
