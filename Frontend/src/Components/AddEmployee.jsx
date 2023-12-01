@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AddEmployee = () => {
     const [employee, setEmployee] = useState({
@@ -46,6 +47,17 @@ const AddEmployee = () => {
         axios.post('http://localhost:8080/auth/add_employee', formData)
             .then((result) => {
                 if(result.data.Status) {
+                    toast(`New Employee data Added !!`, {
+                        position: "top-center",
+                        type:"success",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        });
                     navigate('/dashboard/employee')
                 } else {
                     alert(result.data.Error)

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const EditEmployee = () => {
     const { id } = useParams();
@@ -51,6 +52,17 @@ const EditEmployee = () => {
         axios.put(`http://localhost:8080/auth/edit_employee/${id}`, employee)
             .then(result => {
                 if (result.data.Status) {
+                    toast(`${employee.name} data Updated`, {
+                        position: "top-center",
+                        type:"info",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        });
                     navigate('/dashboard/employee')
                 } else {
                     alert(result.data.Error)

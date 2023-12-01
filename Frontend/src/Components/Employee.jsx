@@ -1,16 +1,27 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Employee = () => {
     const [employee, setEmployee] = useState([]);
     const navigate = useNavigate()
 
-    const handleDelete = (id) => {
+    const handleDelete = (id, employeeName) => {
         axios.delete(`http://localhost:8080/auth/delete_employee/${id}`)
             .then(result => {
                 if (result.data.Status) {
-                    alert('deleted successfully')
+                    toast(`${employeeName} data Deleted !!`, {
+                        position: "top-center",
+                        type:"error",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        });
                     getData()
                 } else {
                     alert(result.data.Error)
@@ -38,7 +49,7 @@ const Employee = () => {
     return (
         <div className="px-5 mt-3">
             <div className="d-flex justify-content-center">
-                <h3>Employee List</h3>
+                <h3>Employees List</h3>
             </div>
             <Link to="/dashboard/add_employee" className="btn btn-success">
                 Add Employee
@@ -51,6 +62,7 @@ const Employee = () => {
                             <th className='border'>Name</th>
                             <th className='border'>Image</th>
                             <th className='border'>Email</th>
+                            <th className='border'>Category</th>
                             <th className='border'>Address</th>
                             <th className='border'>Salary</th>
                             <th className='border'>Action</th>
@@ -69,6 +81,7 @@ const Employee = () => {
                                     />
                                 </td>
                                 <td className='border'>{e.email}</td>
+                                <td className='border'>{e.role}</td>
                                 <td className='border'>{e.address}</td>
                                 <td className='border'>$ {e.salary} /-</td>
                                 <td className='border'>
@@ -80,7 +93,7 @@ const Employee = () => {
                                     </Link>
                                     <button
                                         className="btn btn-danger btn-sm"
-                                        onClick={() => handleDelete(e.id)}
+                                        onClick={() => handleDelete(e.id, e.name)}
                                     >
                                         Delete
                                     </button>

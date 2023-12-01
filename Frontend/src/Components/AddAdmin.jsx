@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const AddAdmin = () => {
     const navigate = useNavigate();
@@ -15,6 +16,17 @@ const AddAdmin = () => {
         axios.post('http://localhost:8080/auth/adminregister', admin)
             .then((result) => {
                 if (result.data.Status) {
+                    toast(`New Admin Added !!`, {
+                        position: "top-center",
+                        type:"success",
+                        autoClose: 1000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                        });
                     navigate('/dashboard')
                 } else {
                     alert(result.data.Error)

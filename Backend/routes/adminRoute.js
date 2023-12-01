@@ -117,7 +117,11 @@ adminRouter.post('/add_employee', upload.single('image'), (req, res) => {
 
 
 adminRouter.get('/employee', (req, res) => {
-    const sql = 'SELECT * FROM employee';
+    const sql = `SELECT e.id, e.name, e.email, e.salary, e.address, e.image, c.name as role 
+                 FROM employee as e
+                 INNER JOIN category as c
+                 ON e.category_id = c.id`;
+                 
     db.query(sql, (err, result) => {
         if (err) {
             return res.status(400).json({ Status: false, Error: "Query Error" })
